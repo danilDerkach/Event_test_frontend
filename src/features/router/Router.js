@@ -14,7 +14,7 @@ const routs = [
 ];
 
 function Router(props) {
-    const isAuthorized = false; //TODO: create login functionality
+    const isAuthorized = true; //TODO: create login functionality
     return (
             <Routes>
             {isAuthorized ?
