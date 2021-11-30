@@ -11,7 +11,6 @@ import {useMemo} from "react";
 import {dateFormatParser} from "../../utils/helpers";
 import Button from "@material-ui/core/Button";
 import DeleteModal from "./DeleteModal";
-import DialogTitle from "@mui/material/DialogTitle";
 
 export default function Events() {
     const [open, setOpen] = React.useState(false);

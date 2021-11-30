@@ -14,15 +14,15 @@ const routs = [
 ];
 
 function Router(props) {
-    const isAuthorized = true;
+    const isAuthorized = false; //TODO: create login functionality
     return (
             <Routes>
             {isAuthorized ?
                 routs.map(route => <Route key={route.path} {...route} />)
                 :
                 <>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route path="/signIn" element={<Login />} />
+                    <Route path="/signUp" element={<Register />} />
                 </>
             }
             </Routes>

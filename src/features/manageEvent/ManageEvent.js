@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import {Input, Grid, TextField} from "@material-ui/core";
+import { Grid, TextField} from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
@@ -14,7 +14,7 @@ const schema = yup.object().shape({
 
 const ManageEvent = () => {
     const navigate = useNavigate();
-    const {control, handleSubmit, setValue} = useForm({
+    const {control, handleSubmit, formState: {errors}} = useForm({
         resolver: yupResolver(schema),
     });
 
@@ -34,26 +34,26 @@ const ManageEvent = () => {
                     name="eventName"
                     control={control}
                     defaultValue={''}
-                    render={({field}) => <Input {...field} />}
+                    render={({field}) => <TextField errors={errors[field.name]} {...field} />}
                 />
                 <Controller
                     name="location"
                     control={control}
                     defaultValue={''}
-                    render={({field}) => <Input {...field} />}
+                    render={({field}) => <TextField errors={errors[field.name]} {...field} />}
                 />
                 <Controller
                     name="startDate"
                     control={control}
                     defaultValue={new Date()}
-                    render={({field}) => <TextField type="date" {...field} />}
+                    render={({field}) => <TextField type="date" errors={errors[field.name]} {...field} />}
                 />
                 <Controller
                     name="endDate"
                     control={control}
                     pattern={"yyyy-MM-dd"}
                     defaultValue={new Date()}
-                    render={({field}) => <TextField type="date"  {...field} />}
+                    render={({field}) => <TextField type="date" errors={errors[field.name]} {...field} />}
                 />
                 <input type="submit"/>
             </Grid>

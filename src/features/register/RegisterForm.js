@@ -1,72 +1,45 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
+import {Grid, TextField} from "@material-ui/core";
+import {Controller} from "react-hook-form";
 
-const RegisterForm = ({
-                        onChange,
-                        errors,
-                        user,
-                        score,
-                        btnTxt,
-                        type,
-                        pwMask,
-                        onPwChange
-                    }) => {
+const RegisterForm = ({ control, handleSubmit, errors }) => {
+
     return (
-        <div className="loginBox">
-            <h1>Sign Up</h1>
-            {errors.message && <p style={{ color: "red" }}>{errors.message}</p>}
-
-                < TextField
+        <form onSubmit={handleSubmit}>
+            <Grid container direction={"column"} style={{width: 400}} >
+                <Controller
                     name="username"
                     floatingLabelText="user name"
-                    value={user.username}
-                    onChange={onChange}
-                    errorText={errors.username}
+                    defaultValue={''}
+                    control={control}
+                    render={({field}) => <TextField errors={errors[field.name]} {...field} />}
                 />
-                <TextField
+                <Controller
                     name="email"
                     floatingLabelText="email"
-                    value={user.email}
-                    onChange={onChange}
-                    errorText={errors.email}
+                    control={control}
+                    defaultValue={''}
+                    render={({field}) => <TextField errors={errors[field.name]} {...field} />}
                 />
-                <TextField
-                    type={type}
+                <Controller
+                    type="password"
                     name="password"
                     floatingLabelText="password"
-                    value={user.password}
-                    onChange={onPwChange}
-                    errorText={errors.password}
+                    control={control}
+                    defaultValue={''}
+                    render={({field}) => <TextField errors={errors[field.name]} {...field} />}
                 />
-
-                <div className="pwStrRow">
-                    {score >= 1 && (
-                        <div>
-                            {/*<PasswordStr score={score} />*/}
-                            {/*<FlatButton*/}
-                            {/*    className="pwShowHideBtn"*/}
-                            {/*    label={btnTxt} onClick={pwMask}*/}
-                            {/*    style={{position: 'relative', left: '50%', transform: 'translateX(-50%)'}}*/}
-                            {/*/>*/}
-                        </div>
-                    )}
-                </div>
-                <TextField
-                    type={type}
-                    name="pwconfirm"
-                    floatingLabelText="confirm password"
-                    value={user.pwconfirm}
-                    onChange={onChange}
-                    errorText={errors.pwconfirm}
+                <Controller
+                    type="password"
+                    name="repeatPassword"
+                    floatingLabelText="password"
+                    control={control}
+                    defaultValue={''}
+                    render={({field}) => <TextField errors={errors[field.name]} {...field} />}
                 />
-                <br />
-                {/*<RaisedButton*/}
-                {/*    className="signUpSubmit"*/}
-                {/*    primary={true}*/}
-                {/*    type="submit"*/}
-                {/*    label="submit"*/}
-                {/*/>*/}
-        </div>
+                <input type="submit"/>
+            </Grid>
+        </form>
     );
 };
 
