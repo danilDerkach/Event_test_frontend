@@ -1,29 +1,31 @@
 import React from 'react';
-import { Routes, Route, Link } from "react-router-dom";
+import {
+    Routes,
+    Route,
+} from "react-router-dom";
 import Events from "../events/Events";
 import ManageEvent from "../manageEvent/ManageEvent";
 import Login from "../login/Login";
 import Register from "../register/Register";
 
 const routs = [
-    {path: "/", component: <Events/>, exact: false},
-    {path: "/manage-event", component: <ManageEvent/>, exact: false},
+    {path: "/", element: <Events/>, exact: false},
+    {path: "/manageEvent", element: <ManageEvent/>, exact: false},
 ];
 
 function Router(props) {
-    const isAuthorized = false;
+    const isAuthorized = true;
     return (
-        <Routes>
+            <Routes>
             {isAuthorized ?
-                routs.map(route => <Route {...route} />)
+                routs.map(route => <Route key={route.path} {...route} />)
                 :
                 <>
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </>
             }
-
-        </Routes>
+            </Routes>
     );
 }
 
